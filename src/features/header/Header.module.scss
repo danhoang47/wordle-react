@@ -1,0 +1,24 @@
+@use '/src/styles/variables';
+@use '/src/styles/mixins';
+
+#header {
+    height: variables.$headerHeight;
+    @include mixins.flex(null, center);
+
+    > div {
+        flex-grow: 1;
+        height: 100%;
+    }
+
+    .leftContent {
+        @include mixins.flex(left, center);
+    }
+
+    .middleContent {
+        @include mixins.flex(center, center);
+    }
+
+    .rightContent {
+        @include mixins.flex(right, center);
+    }
+}

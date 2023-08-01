@@ -1,0 +1,13 @@
+@use '/src/styles/variables';
+
+.defaultLayout {
+
+    .defaultHeader {
+        padding: 0 variables.$headerPaddingHorizontal;
+    }
+
+    .defaultContent {
+        width: 100%;
+        margin: 0 auto;
+    }
+}   
