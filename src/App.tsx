@@ -1,7 +1,7 @@
 import Home from "@/pages/home";
 import { DefaultLayout } from "@/layouts";
 
-import './styles/_global.scss';
+import './styles/global.scss';
 
 function App() {
 	return (

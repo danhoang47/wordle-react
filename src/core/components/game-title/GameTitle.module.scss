@@ -3,6 +3,7 @@
 .game-title {
     font-family: variables.$gameTitleFontFamiliy;
     font-weight: 700;
+    color: var(--text-color);
 
     &.sm {
         font-size: 16px;
@@ -19,4 +20,4 @@
     &.xl {
         font-size: 48px;
     }
-}
+} 

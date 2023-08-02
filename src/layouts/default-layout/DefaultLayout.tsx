@@ -1,21 +1,23 @@
 import { ReactNode } from "react";
 
-import { Header } from "@/features";
+import { Header, NavigationMenu, HelpItem, StatisticsItem, SettingItem } from "@/features";
+import { GameTitle } from "@/core/components";
+
 import styles from './DefaultLayout.module.scss';
-import { GameTitle, Icon } from "@/core/components";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 function DefaultLayout({ children }: { children?: ReactNode }) {
     return (  
         <div className={styles["defaultLayout"]}>
             <Header 
                 classNames={styles["defaultHeader"]}
-                leftContent={<Icon icon={faBars} />}
+                leftContent={<NavigationMenu />}
                 middleContent={<GameTitle />}
                 rightContent={(
-                    <div>
-                        
-                    </div>
+                    <>
+                        <HelpItem />
+                        <StatisticsItem />
+                        <SettingItem />
+                    </>
                 )}
             />
             <div className={styles["defaultContent"]}>

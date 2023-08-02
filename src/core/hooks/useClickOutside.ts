@@ -1,9 +1,10 @@
-import { MutableRefObject, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 function useClickOutside<T extends HTMLElement>(
-	ref: MutableRefObject<T>,
 	callback: () => void
 ) {
+    const ref = useRef<T>(null);
+
     const handleClick = (event: MouseEvent) => {
         if (ref.current && !ref.current.contains(event.target as Node)) {
             callback();
@@ -18,6 +19,8 @@ function useClickOutside<T extends HTMLElement>(
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ref]);
+
+    return ref;
 }
 
 export default useClickOutside;

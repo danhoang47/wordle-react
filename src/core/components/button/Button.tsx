@@ -4,15 +4,20 @@ type ButtonProps = {
 	children?: ReactNode;
 	label?: string;
 	onClick: () => void;
+	className?: string;
 };
 
-function Button({ children, label = "button", onClick }: ButtonProps) {
+function Button({ className = "", children, label = "button", onClick }: ButtonProps) {
 	return (
 		<button
 			role="button"
 			type="button"
 			aria-label={label}
-			onClick={onClick}
+			onClick={(event) => {
+				event.stopPropagation();
+				onClick();
+			}}
+			className={className}
 		>
 			{children}
 		</button>

@@ -1,0 +1,45 @@
+@use "/src/styles/mixins";
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	background-color: rgba(255, 255, 255, 50%);
+	@include mixins.flex(center, center);
+}
+
+.modal {
+	position: relative;
+	box-shadow: 0 4px 23px 0 rgba(0, 0, 0, 0.2);
+	width: 90%;
+	max-width: 520px;
+	$modal-padding: 18px;
+	padding: $modal-padding;
+	border-radius: 8px;
+
+	.modal-close-button {
+		position: absolute;
+		width: 24px;
+        background: none;
+        font-size: 24px;
+
+		&.left {
+			left: $modal-padding;
+		}
+
+		&.right {
+			right: $modal-padding;
+		}
+
+		&.top {
+			top: $modal-padding;
+		}
+
+		&.bottom {
+			bottom: $modal-padding;
+		}
+	}
+}

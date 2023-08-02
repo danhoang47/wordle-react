@@ -1,5 +1,8 @@
+@use 'sass:map';
+
 @mixin flex($justifyContent: null, $alignItem: null) {
 	display: flex;
+	gap: 10px;
 
 	@if $alignItem {
 		align-items: $alignItem;
@@ -8,4 +11,14 @@
 	@if $justifyContent {
 		justify-content: $justifyContent;
 	}
+}
+
+@mixin themify($themes, $themeName) {
+	@each $theme-name, $theme-vars in $themes {
+		@if $theme-name == $themeName {
+			@each $key, $var in $theme-vars {
+				--#{$key}: #{$var};
+			}
+		}
+ 	}
 }

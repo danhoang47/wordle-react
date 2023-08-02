@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import "https://fonts.googleapis.com/css2?family=Noto+Serif+NP+Hmong:wght@700&family=Open+Sans:ital,wght@0,400;0,500;0,600;1,300&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&display=swap";
 
 /* Font families */
@@ -15,11 +16,31 @@ $color-tone-7: #121213;
 $color-tone-8: #ffffff;
 $color-tone-9: #424242;
 $color-tone-10: #dfdfdf;
-$darken-yellow: #b59f3b;
-$darken-green: #538d4e;
+$yellow: #c9b458;
+$green: #6aaa64;
 
 /* Dimensions */
 $headerHeight: 65px;
 
 /* Margin and Padding */
 $headerPaddingHorizontal: 20px; 
+
+$darkenPercent: 30%;
+
+$themes: (
+    light: (
+        color-background: $color-tone-1,
+        text-color: $color-tone-7,
+        color-correct: $green,
+        color-present: $yellow,
+        color-absent: $color-tone-2,
+        color-sub-background: $color-tone-2
+    ),
+    dark: (
+        color-background: $color-tone-7,
+        text-color: $color-tone-1,
+        color-correct: darken($green, $darkenPercent),
+        color-present: darken($yellow, $darkenPercent),
+        color-absent: $color-tone-4,
+    )
+)

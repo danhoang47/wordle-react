@@ -1,0 +1,21 @@
+@use './mixins';
+@use './variables';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	@include mixins.themify(variables.$themes, light);
+
+	&.theme-dark {
+		@include mixins.themify(variables.$themes, dark);
+	}
+}
+
+a, button {
+	all: unset;
+	cursor: pointer;
+}
