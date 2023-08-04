@@ -4,7 +4,11 @@ import { IconButton } from "@/core/components";
 
 function NavigationMenu() {
 	return (
-		<IconButton onClick={() => {}} label="Navigation Menu" icon={faBars} />
+		<IconButton
+			onClick={() => {}}
+			ariaLabel="Navigation Menu"
+			icon={faBars}
+		/>
 	);
 }
 

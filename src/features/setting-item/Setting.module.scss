@@ -1,0 +1,31 @@
+@use "/src/styles/mixins";
+
+.setting-option {
+	padding: 16px 0;
+	border-bottom: 1px solid var(--color-border);
+	@include mixins.flex(space-between, center);
+
+	.setting-option-label {
+
+		.title {
+            font-size: 18px;
+			color: var(--text-color);
+			font-weight: 500;
+            line-height: 18px;
+		}
+
+		.description {
+			font-size: 12px;
+			color: var(--color-sub-background);
+            line-height: 14px;
+            display: block;
+		}
+	}
+}
+
+.setting-footer {
+	@include mixins.flex(space-between, center);
+	font-size: 12px;
+	padding: 12px 0;
+	color: var(--color-sub-background);
+}

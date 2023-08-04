@@ -1,15 +1,52 @@
 
+$fontMd: 20px;
+$fontLg: 24px;
+$fontXl: 30px;
+$tabletScreenDecreaseValue: 4px;
+$mobileScreenDecreaseValue: $tabletScreenDecreaseValue * 2;
+
 .icon {
+    color: var(--text-color);
 
     &.md {
-        font-size: 16px;
+        font-size: $fontMd
     }
 
     &.lg {
-        font-size: 24px;
+        font-size: $fontLg
     }
 
     &.xl {
-        font-size: 30px
+        font-size: $fontXl
     }
+
+    // tablet
+    @media screen and (max-width: 750px) {
+        &.md {
+            font-size: $fontMd - $tabletScreenDecreaseValue
+        }
+    
+        &.lg {
+            font-size: $fontLg - $tabletScreenDecreaseValue
+        }
+    
+        &.xl {
+            font-size: $fontXl - $tabletScreenDecreaseValue
+        }
+	} 
+    
+    // mobile
+    @media screen and (max-width: 500px) {
+        &.md {
+            font-size: $fontMd - $mobileScreenDecreaseValue
+        }
+    
+        &.lg {
+            font-size: $fontLg - $mobileScreenDecreaseValue
+        }
+    
+        &.xl {
+            font-size: $fontXl - $mobileScreenDecreaseValue
+        }
+	}   
 }

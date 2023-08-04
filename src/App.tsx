@@ -1,13 +1,16 @@
+
+import { GameSettingContextProvider } from "./core/contexts/GameSettingContext";
 import Home from "@/pages/home";
 import { DefaultLayout } from "@/layouts";
-
-import './styles/global.scss';
+import "./styles/global.scss";
 
 function App() {
 	return (
-		<DefaultLayout>
-			<Home />
-		</DefaultLayout>
+		<GameSettingContextProvider>
+			<DefaultLayout>
+				<Home />
+			</DefaultLayout>
+		</GameSettingContextProvider>
 	);
 }
 

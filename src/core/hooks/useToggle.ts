@@ -1,4 +1,4 @@
-import { useCallback, useState, useDebugValue } from "react";
+import { useCallback, useState } from "react";
 
 function useToggle(
 	initialState: boolean = false
@@ -9,8 +9,6 @@ function useToggle(
 	const handleToggle = useCallback((value: boolean) => {
 		setOn(value);
 	}, []);
-
-	useDebugValue(on ? 'on' : 'off');
 
 	return [on, handleToggle];
 }

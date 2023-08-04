@@ -1,0 +1,37 @@
+@use "/src/styles/variables";
+
+.switch {
+	height: 20px;
+	width: 32px;
+	// pill button
+	border-radius: 999px;
+	display: block;
+	position: relative;
+
+	.switch-knob {
+		position: absolute;
+		height: calc(100% - 4px);
+		width: 50%;
+		border-radius: 8px;
+		transition: transform 0.3s;
+		top: 2px;
+		left: 2px;
+		background-color: variables.$color-tone-1;
+	}
+
+	&[aria-checked="true"] {
+		background-color: variables.$green;
+
+		.switch-knob {
+			transform: translateX(calc(100% - 4px));
+		}
+	}
+
+	&[aria-checked="false"] {
+		background-color: var(--color-sub-background);
+
+		.switch-knob {
+			transform: translateX(0);
+		}
+	}
+}

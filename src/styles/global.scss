@@ -5,6 +5,8 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
+	transition: background-color 0.15s linear, color 0.15s linear;
 }
 
 :root {
@@ -13,6 +15,10 @@
 	&.theme-dark {
 		@include mixins.themify(variables.$themes, dark);
 	}
+}
+
+body {
+	background-color: var(--color-background);
 }
 
 a, button {

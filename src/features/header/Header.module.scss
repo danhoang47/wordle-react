@@ -4,10 +4,11 @@
 #header {
     height: variables.$headerHeight;
     @include mixins.flex(null, center);
-    border-bottom: 1px solid var(--color-sub-background);
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background);
 
     > div {
-        flex-grow: 1;
+        width: calc(calc(100% - 20px) / 3);
         height: 100%;
     }
 
@@ -22,4 +23,19 @@
     .rightContent {
         @include mixins.flex(right, center);
     }
+
+    @media screen and (max-width: 750px) and (min-width: 401px) {
+        .leftContent {
+            width: fit-content;
+        }
+
+        .middleContent {
+            flex-grow: 1;
+            justify-content: left;
+        }
+	}    
+
+    @media screen and (max-width: 400px) {
+        height: variables.$headerHeightMobile;
+	}  
 }

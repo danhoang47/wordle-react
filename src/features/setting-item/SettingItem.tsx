@@ -14,7 +14,7 @@ function SettingItem() {
 				onClick={() => {
 					handleToggle(true);
 				}}
-				label="Setting button"
+				ariaLabel="Setting button"
 				icon={faGear}
 				size="xl"
 			/>

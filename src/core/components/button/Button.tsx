@@ -1,23 +1,38 @@
-import { ReactNode } from "react";
+import { clsx } from "@/utils";
+import { ReactNode, ButtonHTMLAttributes } from "react";
+
+import styles from './Button.module.scss';
 
 type ButtonProps = {
 	children?: ReactNode;
-	label?: string;
+	ariaLabel?: string;
 	onClick: () => void;
 	className?: string;
+	role?: string;
+	type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
+	ariaChecked?: boolean
 };
 
-function Button({ className = "", children, label = "button", onClick }: ButtonProps) {
+function Button({
+	className,
+	children,
+	ariaLabel = "button",
+	onClick,
+	role = "button",
+	type = "button",
+	ariaChecked
+}: ButtonProps) {
 	return (
 		<button
-			role="button"
-			type="button"
-			aria-label={label}
+			role={role}
+			type={type}
+			aria-checked={ariaChecked}
+			aria-label={ariaLabel}
 			onClick={(event) => {
 				event.stopPropagation();
 				onClick();
 			}}
-			className={className}
+			className={clsx(styles['button'], className)}
 		>
 			{children}
 		</button>

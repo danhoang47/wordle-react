@@ -1,0 +1,6 @@
+@use '/src/styles/mixins';
+
+.button {
+    text-align: center;
+    @include mixins.flex(center, center);
+}
