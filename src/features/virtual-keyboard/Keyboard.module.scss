@@ -1,0 +1,25 @@
+@use '/src/styles/mixins';
+
+#keyboard {
+    height: 200px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+
+    .row {
+        @include mixins.flex(center, center);
+        flex-wrap: nowrap;
+        gap: 8px;
+
+        .letterButton {
+            min-width: 43px;
+            user-select: none;
+            border-radius: 4px;
+            height: 58px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            text-transform: capitalize;
+            font-weight: 600;
+            background-color: var(--letter-bg-color);
+        }
+    }
+}

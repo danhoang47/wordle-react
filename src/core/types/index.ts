@@ -23,6 +23,9 @@ export type GameSetting = {
 	highContrastMode: boolean;
 };
 
+
+export type Evaluation = "absent" | "present" | "correct"
+
 export type ValueChangeHandler<T> = (key: keyof T, value: T[keyof T]) => void;
 
 export type ContextType<T, HandlerFunc extends string> = T &

@@ -2,12 +2,14 @@ type CSSClasses = {
 	[key: string]: boolean;
 };
 
-export default function clsx(...input: (string | CSSClasses | undefined)[]): string {
+export default function clsx(
+	...input: (string | CSSClasses | boolean | undefined)[]
+): string {
 	return input
 		.map((value) => {
 			if (typeof value === "string") {
 				return value ?? "";
-			} else if (typeof value === 'object'){
+			} else if (typeof value === "object") {
 				const separator = " ";
 				const initialValue = "";
 				return Object.keys(value).reduce((acc, key) => {
@@ -17,5 +19,6 @@ export default function clsx(...input: (string | CSSClasses | undefined)[]): str
 				return "";
 			}
 		})
-		.join(" ");
+		.join(" ")
+		.trim();
 }

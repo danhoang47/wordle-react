@@ -2,15 +2,18 @@ import { createPortal } from "react-dom";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 import { IconButton } from "@/core/components";
-import { useToggle } from "@/core/hooks";
+import { useKeyPress, useToggle } from "@/core/hooks";
 import SettingModal from "./SettingModal";
 
 function SettingItem() {
 	const [on, handleToggle] = useToggle(false);
+	useKeyPress('Escape', () => {
+		handleToggle(false);
+	})
 
 	return (
 		<>
-			<IconButton
+			<IconButton	
 				onClick={() => {
 					handleToggle(true);
 				}}

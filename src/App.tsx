@@ -1,5 +1,6 @@
-
-import { GameSettingContextProvider } from "./core/contexts/GameSettingContext";
+import {
+	GameSettingContextProvider
+} from "./core/contexts";
 import Home from "@/pages/home";
 import { DefaultLayout } from "@/layouts";
 import "./styles/global.scss";
