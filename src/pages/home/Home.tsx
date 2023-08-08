@@ -10,24 +10,25 @@ const gameStateInitialValue: GameState = {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	boardState: Array.from(new Array(6)).map((_) => ""),
 	currentRowIndex: 0,
+	isComplete: false,
 };
 
 function Home() {
 	const {
 		gameState,
+		keyword,
 		isValid,
 		onAdd,
 		onDelete,
 		onSubmit,
 		onSubmitInvalidKeyword,
 	} = useGameState(gameStateInitialValue);
-	const [keyword, setKeyword] = useState("");
 
-	useEffect(() => {
-		fetch("https://random-word-api.herokuapp.com/word?length=5")
-			.then<[string]>((res) => res.json())
-			.then((keyword) => setKeyword(keyword[0]));
-	}, []);
+	// useEffect(() => {
+	// 	fetch("https://random-word-api.herokuapp.com/word?length=5")
+	// 		.then<[string]>((res) => res.json())
+	// 		.then((keyword) => setKeyword(keyword[0]));
+	// }, []);
 
 	return (
 		<div id={styles["home"]}>
@@ -39,6 +40,9 @@ function Home() {
 				onSubmitInvalidKeyword={onSubmitInvalidKeyword}
 			/>
 			<VirtualKeyboard
+				keyword={keyword}
+				currentRowIndex={gameState.currentRowIndex}
+				boardState={gameState.boardState}
 				onAdd={onAdd}
 				onDelete={onDelete}
 				onSubmit={onSubmit}

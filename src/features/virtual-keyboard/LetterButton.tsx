@@ -8,16 +8,15 @@ import { clsx } from "@/utils";
 
 import styles from "./Keyboard.module.scss";
 
-type LetterCellProps = {
+type LetterButtonProps = {
 	letter: string;
 	ariaLabel?: string;
 	role?: string;
 	evaluation?: Evaluation;
-	isEvaluated: boolean;
 	style?: CSSProperties;
 	onAdd: (key: string) => void;
 	onDelete: () => void;
-	onSubmit: () => void
+	onSubmit: () => void;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -25,19 +24,17 @@ function LetterButton({
 	letter,
 	role = "button",
 	evaluation,
-	isEvaluated,
-	ariaLabel,
 	onAdd,
 	onDelete,
-	onSubmit
-}: LetterCellProps) {
+	onSubmit,
+}: LetterButtonProps) {
 	const onKeyPress = () => {
-		if (letter === 'Enter') {
-			onSubmit()
-		} else if (letter === 'Backspace') {
-			onDelete()
+		if (letter === "Enter") {
+			onSubmit();
+		} else if (letter === "Backspace") {
+			onDelete();
 		} else {
-			onAdd(letter)
+			onAdd(letter);
 		}
 	};
 
@@ -45,8 +42,14 @@ function LetterButton({
 
 	return (
 		<Button
-			className={clsx(styles["letterButton"], isEvaluated)}
-			aria-label={isEvaluated ? `${letter} ${evaluation}` : ariaLabel}
+			className={clsx(
+				styles["letterButton"],
+				letter.length > 1 && styles["oneAndAHalf"],
+				evaluation && styles[evaluation!]
+			)}
+			ariaLabel={
+				evaluation ? `${letter} ${evaluation}` : `${letter} button`
+			}
 			role={role}
 			onClick={onKeyPress}
 		>

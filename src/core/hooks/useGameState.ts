@@ -3,6 +3,7 @@ import { useReducer, useState } from "react";
 export type GameState = {
 	boardState: string[];
 	currentRowIndex: number;
+	isComplete: boolean;
 };
 
 export type GameStatePayload = {
@@ -16,16 +17,18 @@ type InternalGameStatePayload = {
 };
 
 const gameStateReducer = (
-	{ boardState, currentRowIndex }: GameState,
+	{ boardState, currentRowIndex, isComplete }: GameState,
 	payload: GameStatePayload | InternalGameStatePayload
 ): GameState => {
+	if (isComplete) return { boardState, currentRowIndex, isComplete };
+
 	if (payload.action === "add") {
-		console.log(payload.key);
 		return {
 			boardState: boardState.map((row, index) =>
 				currentRowIndex === index ? row + payload.key : row
 			),
 			currentRowIndex,
+			isComplete,
 		};
 	} else if (payload.action === "delete") {
 		console.log("delete");
@@ -34,6 +37,7 @@ const gameStateReducer = (
 				currentRowIndex === index ? row.slice(0, row.length - 1) : row
 			),
 			currentRowIndex,
+			isComplete,
 		};
 	} else if (payload.action === "set") {
 		const numberOfRowNotEmpty =
@@ -45,12 +49,12 @@ const gameStateReducer = (
 		return {
 			boardState: payload.boardState,
 			currentRowIndex: numberOfRowNotEmpty < 0 ? 0 : numberOfRowNotEmpty,
+			isComplete,
 		};
 	} else {
-		console.log("Submit: ", boardState);
-
 		return {
 			boardState,
+			isComplete: boardState[currentRowIndex] === payload.key,
 			currentRowIndex: currentRowIndex + 1,
 		};
 	}
@@ -60,9 +64,8 @@ function useGameState(initialState: GameState) {
 	const [gameState, dispatch] = useReducer(gameStateReducer, initialState);
 	const [isFetching, setFetching] = useState(false);
 	const [isValid, setValid] = useState(true);
+	const [keyword, setKeyword] = useState("hello");
 	const FIXED_WORD_LENGHT = 5;
-
-	console.log(gameState.boardState);
 
 	// TODO: load latest gameState from LocalStorage
 
@@ -82,7 +85,6 @@ function useGameState(initialState: GameState) {
 	};
 
 	const onSubmit = () => {
-		console.log(gameState.boardState)
 		if (
 			isFetching ||
 			gameState.boardState[gameState.currentRowIndex].length <
@@ -104,7 +106,7 @@ function useGameState(initialState: GameState) {
 					// TODO: show Toast
 					setValid(false);
 				} else {
-					dispatch({ action: "submit" });
+					dispatch({ action: "submit", key: keyword });
 				}
 			})
 			.catch((err) => {
@@ -118,6 +120,7 @@ function useGameState(initialState: GameState) {
 
 	return {
 		gameState,
+		keyword,
 		isValid,
 		onAdd,
 		onDelete,

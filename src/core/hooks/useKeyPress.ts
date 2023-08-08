@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 function useKeyPress(key: string, handler: (args?: unknown) => void) {
-    
-    useEffect(() => {
-        document.addEventListener('keydown', (event) => {
-            if (event.key === key) {
-                console.log(key);
-                handler();
-            }
-        })
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+	const handleKeyPress = (event: KeyboardEvent) => {
+		event.stopPropagation();
+		if (event.key === key) {
+			handler();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("keydown", handleKeyPress);
+
+		return () => document.removeEventListener("keydown", handleKeyPress);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [handler]);
 }
 
 export default useKeyPress;

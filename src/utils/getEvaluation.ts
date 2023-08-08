@@ -1,9 +1,9 @@
 import { Evaluation } from "@/core/types";
 
 const getEvaluation = (
+	keyword: string,
 	keyLetter: string,
-	keyLetterIndex: number,
-	keyword: string
+	keyLetterIndex: number
 ): Evaluation | undefined => {
 	if (!keyword) return undefined;
 

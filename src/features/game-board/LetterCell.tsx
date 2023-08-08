@@ -1,4 +1,4 @@
-import { CSSProperties, memo } from "react";
+import { memo } from "react";
 
 import { clsx } from "@/utils";
 import { Evaluation } from "@/core/types";
@@ -11,7 +11,7 @@ type LetterCellProps = {
 	role?: string;
 	evaluation?: Evaluation;
 	isEvaluated: boolean;
-	style?: CSSProperties;
+	animationDelay: number
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -20,17 +20,16 @@ function LetterCell({
 	role = "img",
 	evaluation,
 	isEvaluated,
-	style,
+	animationDelay
 }: LetterCellProps) {
-	console.log(isEvaluated);
-	const evaluatedClassnames =
-		evaluation && `${styles[evaluation]} ${styles["flip"]}`;
+	console.log('LetterCell: ', isEvaluated)
 
 	return (
 		<div
 			className={clsx(
 				styles["letterCell"],
-				isEvaluated && evaluatedClassnames
+				isEvaluated && styles[evaluation!],
+				isEvaluated && styles['flip'],
 			)}
 			aria-label={
 				isEvaluated
@@ -40,7 +39,7 @@ function LetterCell({
 					: "empty"
 			}
 			role={role}
-			style={style}
+			style={{ animationDelay: `${animationDelay}ms`}}
 		>
 			{letter}
 		</div>
