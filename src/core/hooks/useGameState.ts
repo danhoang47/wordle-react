@@ -1,5 +1,7 @@
 import { useReducer, useState } from "react";
 
+import words from "./words";
+
 export type GameState = {
 	boardState: string[];
 	currentRowIndex: number;
@@ -52,11 +54,13 @@ const gameStateReducer = (
 			isComplete,
 		};
 	} else {
-		return {
+		const nextState: GameState = {
 			boardState,
 			isComplete: boardState[currentRowIndex] === payload.key,
 			currentRowIndex: currentRowIndex + 1,
-		};
+		}
+
+		return nextState;
 	}
 };
 
@@ -64,10 +68,14 @@ function useGameState(initialState: GameState) {
 	const [gameState, dispatch] = useReducer(gameStateReducer, initialState);
 	const [isFetching, setFetching] = useState(false);
 	const [isValid, setValid] = useState(true);
-	const [keyword, setKeyword] = useState("hello");
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [keyword, setKeyword] = useState(
+		() => words[Math.round(Math.random() * words.length)]
+	);
 	const FIXED_WORD_LENGHT = 5;
 
 	// TODO: load latest gameState from LocalStorage
+	console.log(keyword);
 
 	const onAdd = (key: string) => {
 		if (

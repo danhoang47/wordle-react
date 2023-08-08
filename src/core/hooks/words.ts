@@ -158,4 +158,4 @@ const words = [
 	"puppy",
 ];
 
-export default new Set(words);
+export default words;

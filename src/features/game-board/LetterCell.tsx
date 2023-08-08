@@ -11,7 +11,7 @@ type LetterCellProps = {
 	role?: string;
 	evaluation?: Evaluation;
 	isEvaluated: boolean;
-	animationDelay: number
+	animationDelay: number;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -20,28 +20,50 @@ function LetterCell({
 	role = "img",
 	evaluation,
 	isEvaluated,
-	animationDelay
+	animationDelay,
 }: LetterCellProps) {
-	console.log('LetterCell: ', isEvaluated)
+	console.log("LetterCell: ", isEvaluated);
 
 	return (
 		<div
 			className={clsx(
 				styles["letterCell"],
-				isEvaluated && styles[evaluation!],
-				isEvaluated && styles['flip'],
+				isEvaluated && styles["noBorder"]
 			)}
-			aria-label={
-				isEvaluated
-					? `${letter} ${evaluation}`
-					: letter
-					? letter
-					: "empty"
-			}
-			role={role}
-			style={{ animationDelay: `${animationDelay}ms`}}
 		>
-			{letter}
+			<div
+				className={clsx(
+					styles["letterCellCard"],
+					isEvaluated && styles["flip"]
+				)}
+				aria-label={
+					isEvaluated
+						? `${letter} ${evaluation}`
+						: letter
+						? letter
+						: "empty"
+				}
+				role={role}
+				style={{ transitionDelay: `${animationDelay}ms` }}
+			>
+				<div
+					className={clsx(
+						styles["letterCellFace"],
+						styles["cellFaceFront"]
+					)}
+				>
+					{letter}
+				</div>
+				<div
+					className={clsx(
+						styles["letterCellFace"],
+						styles["cellFaceBack"],
+						isEvaluated && styles[evaluation!]
+					)}
+				>
+					{letter}
+				</div>
+			</div>
 		</div>
 	);
 }

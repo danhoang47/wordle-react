@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { GameBoard, VirtualKeyboard } from "@/features";
 import { useGameState } from "@/core/hooks";
 import { GameState } from "@/core/hooks/useGameState";
@@ -23,12 +21,6 @@ function Home() {
 		onSubmit,
 		onSubmitInvalidKeyword,
 	} = useGameState(gameStateInitialValue);
-
-	// useEffect(() => {
-	// 	fetch("https://random-word-api.herokuapp.com/word?length=5")
-	// 		.then<[string]>((res) => res.json())
-	// 		.then((keyword) => setKeyword(keyword[0]));
-	// }, []);
 
 	return (
 		<div id={styles["home"]}>
