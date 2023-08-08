@@ -25,9 +25,9 @@
 	border-radius: 8px;
 	background-color: var(--color-background);
 	color: var(--text-color);
-	-webkit-animation: slide-in-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+	-webkit-animation: slide-in-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
 		both;
-	animation: slide-in-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation: slide-in-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
 	.modal-close-button {
 		position: absolute;
@@ -100,8 +100,8 @@
  */
 @-webkit-keyframes slide-in-bottom {
 	0% {
-		-webkit-transform: translateY(60%);
-		transform: translateY(60%);
+		-webkit-transform: translateY(20%);
+		transform: translateY(20%);
 		opacity: 0;
 	}
 	100% {
@@ -112,8 +112,8 @@
 }
 @keyframes slide-in-bottom {
 	0% {
-		-webkit-transform: translateY(60%);
-		transform: translateY(60%);
+		-webkit-transform: translateY(20%);
+		transform: translateY(20%);
 		opacity: 0;
 	}
 	100% {

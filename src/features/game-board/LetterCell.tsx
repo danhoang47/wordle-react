@@ -22,8 +22,6 @@ function LetterCell({
 	isEvaluated,
 	animationDelay,
 }: LetterCellProps) {
-	console.log("LetterCell: ", isEvaluated);
-
 	return (
 		<div
 			className={clsx(

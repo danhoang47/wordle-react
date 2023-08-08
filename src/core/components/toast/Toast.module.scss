@@ -1,0 +1,31 @@
+@use '/src/styles/mixins';
+@use '/src/styles/variables';
+
+.toast {
+    @include mixins.flex(center, center);
+    color: variables.$color-tone-7;
+    background-color: darken(variables.$color-tone-1, 20%);
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+
+    &.long {
+        
+    }
+
+    &.short {
+        animation: show 1.2s linear forwards;
+    }
+}
+
+@keyframes show {
+    0% {
+        display: block;
+        opacity: 1;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}

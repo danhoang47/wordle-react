@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useLayoutEffect } from "react";
 
 import words from "./words";
 
@@ -58,7 +58,7 @@ const gameStateReducer = (
 			boardState,
 			isComplete: boardState[currentRowIndex] === payload.key,
 			currentRowIndex: currentRowIndex + 1,
-		}
+		};
 
 		return nextState;
 	}
@@ -72,10 +72,21 @@ function useGameState(initialState: GameState) {
 	const [keyword, setKeyword] = useState(
 		() => words[Math.round(Math.random() * words.length)]
 	);
+	const [messages, setMessages] = useState<string[]>([]);
+
+	const onToastShowEnd = () => {
+		setMessages((prev) => prev.slice(0, prev.length - 1));
+	};
 	const FIXED_WORD_LENGHT = 5;
 
 	// TODO: load latest gameState from LocalStorage
-	console.log(keyword);
+
+	// Show toast message when completed
+	useLayoutEffect(() => {
+		if (gameState.isComplete) {
+			setMessages((prev) => [...prev, "Few !!!"]);
+		}
+	}, [gameState.isComplete])
 
 	const onAdd = (key: string) => {
 		if (
@@ -108,17 +119,13 @@ function useGameState(initialState: GameState) {
 		)
 			.then((res) => res.json())
 			.then((data) => {
-				setFetching(false);
-
 				if (data.message) {
-					// TODO: show Toast
 					setValid(false);
+					setMessages((prev) => [...prev, "Invalid keyword !!!"]);
 				} else {
 					dispatch({ action: "submit", key: keyword });
 				}
-			})
-			.catch((err) => {
-				console.log(err);
+				setFetching(false);
 			});
 	};
 
@@ -129,11 +136,13 @@ function useGameState(initialState: GameState) {
 	return {
 		gameState,
 		keyword,
+		messages,
 		isValid,
 		onAdd,
 		onDelete,
 		onSubmit,
 		onSubmitInvalidKeyword,
+		onToastShowEnd,
 	};
 }
 

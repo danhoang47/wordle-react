@@ -4,6 +4,7 @@ import Icon from "./icon";
 import IconButton from "./icon-button";
 import Modal from "./modal";
 import Switch from "./switch";
+import Toast from "./toast";
 
 export {
     Button,
@@ -11,5 +12,6 @@ export {
     Icon,
     IconButton,
     Modal,
-    Switch
+    Switch,
+    Toast
 }

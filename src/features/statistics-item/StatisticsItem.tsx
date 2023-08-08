@@ -6,7 +6,7 @@ function StatisticsItem() {
     return (  
         <IconButton
 			onClick={() => {}}
-			label="Statistics button"
+			ariaLabel="Statistics button"
 			icon={faChartSimple}
 			size="xl"
 		/>
