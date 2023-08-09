@@ -1,9 +1,9 @@
-import { GameBoard, VirtualKeyboard } from "@/features";
-import { useGameState } from "@/core/hooks";
 import { GameState } from "@/core/hooks/useGameState";
+import { useGameState } from "@/core/hooks";
+import { GameBoard, RestartGameItem, VirtualKeyboard } from "@/features";
+import { Toast } from "@/core/components";
 
 import styles from "./Home.module.scss";
-import { Toast } from "@/core/components";
 
 const gameStateInitialValue: GameState = {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,6 +22,7 @@ function Home() {
 		onDelete,
 		onSubmit,
 		onSubmitInvalidKeyword,
+		onRestartGame,
 		onToastShowEnd,
 	} = useGameState(gameStateInitialValue);
 
@@ -42,6 +43,9 @@ function Home() {
 				onDelete={onDelete}
 				onSubmit={onSubmit}
 			/>
+			{
+				gameState.isComplete && <RestartGameItem onRestartButtonClick={onRestartGame}/>
+			}
 			<div className={styles["toastContainer"]}>
 				{messages.reverse().map((message, index) => (
 					<Toast

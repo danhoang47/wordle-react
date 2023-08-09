@@ -1,4 +1,4 @@
-import { useReducer, useState, useLayoutEffect } from "react";
+import { useReducer, useState, useLayoutEffect, useRef } from "react";
 
 import words from "./words";
 
@@ -13,6 +13,11 @@ export type GameStatePayload = {
 	action: "submit" | "delete" | "add";
 };
 
+export type ResetGameStatePayload = {
+	action: "reset";
+	gameState: GameState;
+};
+
 type InternalGameStatePayload = {
 	action: "set";
 	boardState: string[];
@@ -20,9 +25,9 @@ type InternalGameStatePayload = {
 
 const gameStateReducer = (
 	{ boardState, currentRowIndex, isComplete }: GameState,
-	payload: GameStatePayload | InternalGameStatePayload
+	payload: GameStatePayload | InternalGameStatePayload | ResetGameStatePayload
 ): GameState => {
-	if (isComplete) return { boardState, currentRowIndex, isComplete };
+	if (isComplete && payload.action !== 'reset') return { boardState, currentRowIndex, isComplete };
 
 	if (payload.action === "add") {
 		return {
@@ -53,10 +58,15 @@ const gameStateReducer = (
 			currentRowIndex: numberOfRowNotEmpty < 0 ? 0 : numberOfRowNotEmpty,
 			isComplete,
 		};
+	} else if (payload.action === "reset") {
+		console.log("Reset: ", payload.gameState);
+		return payload.gameState;
 	} else {
 		const nextState: GameState = {
 			boardState,
-			isComplete: boardState[currentRowIndex] === payload.key,
+			isComplete:
+				boardState[currentRowIndex] === payload.key ||
+				currentRowIndex === boardState.length,
 			currentRowIndex: currentRowIndex + 1,
 		};
 
@@ -64,15 +74,22 @@ const gameStateReducer = (
 	}
 };
 
+const getKeyword = () => words[Math.round(Math.random() * words.length)];
+
 function useGameState(initialState: GameState) {
-	const [gameState, dispatch] = useReducer(gameStateReducer, initialState);
+	const initialStateRef = useRef<GameState>(initialState);
+	const [gameState, dispatch] = useReducer(
+		gameStateReducer,
+		initialStateRef.current
+	);
 	const [isFetching, setFetching] = useState(false);
 	const [isValid, setValid] = useState(true);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [keyword, setKeyword] = useState(
-		() => words[Math.round(Math.random() * words.length)]
-	);
+	const [keyword, setKeyword] = useState(getKeyword());
 	const [messages, setMessages] = useState<string[]>([]);
+
+	console.log(keyword);
+	console.log(gameState);
 
 	const onToastShowEnd = () => {
 		setMessages((prev) => prev.slice(0, prev.length - 1));
@@ -86,7 +103,7 @@ function useGameState(initialState: GameState) {
 		if (gameState.isComplete) {
 			setMessages((prev) => [...prev, "Few !!!"]);
 		}
-	}, [gameState.isComplete])
+	}, [gameState.isComplete]);
 
 	const onAdd = (key: string) => {
 		if (
@@ -129,6 +146,11 @@ function useGameState(initialState: GameState) {
 			});
 	};
 
+	const onRestartGame = () => {
+		setKeyword(getKeyword);
+		dispatch({ action: "reset", gameState: initialStateRef.current });
+	};
+
 	const onSubmitInvalidKeyword = () => {
 		setValid(true);
 	};
@@ -143,6 +165,7 @@ function useGameState(initialState: GameState) {
 		onSubmit,
 		onSubmitInvalidKeyword,
 		onToastShowEnd,
+		onRestartGame,
 	};
 }
 

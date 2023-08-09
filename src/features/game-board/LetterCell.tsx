@@ -22,6 +22,7 @@ function LetterCell({
 	isEvaluated,
 	animationDelay,
 }: LetterCellProps) {
+
 	return (
 		<div
 			className={clsx(

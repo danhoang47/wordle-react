@@ -3,7 +3,7 @@ import { useEffect } from "react";
 function useKeyPress(key: string, handler: (args?: unknown) => void) {
 	const handleKeyPress = (event: KeyboardEvent) => {
 		event.stopPropagation();
-		if (event.key === key) {
+		if (event.key === key || event.key === key) {
 			handler();
 		}
 	};

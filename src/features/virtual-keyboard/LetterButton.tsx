@@ -39,7 +39,6 @@ function LetterButton({
 	};
 
 	useKeyPress(letter, onKeyPress);
-
 	return (
 		<Button
 			className={clsx(

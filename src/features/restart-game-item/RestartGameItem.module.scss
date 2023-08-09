@@ -1,0 +1,44 @@
+@use "/src/styles/mixins";
+@use "/src/styles/variables";
+
+.restartGameItem {
+    @include mixins.flex(center, center);
+    flex-direction: column;
+    margin-top: 2rem;
+
+	.restartGameButton {
+		gap: 0.2rem;
+		border-radius: 0.4rem;
+		width: 100%;
+        @include mixins.flex(center, center);
+        
+        .restartIcon {
+            color: var(--color-border);
+        }
+	}
+
+	&:hover {
+        .restartIcon {
+            color: var(--text-color);
+        }
+        
+        .title {
+            display: block;
+            animation: slide-down-fwd 0.15s ease-out;
+        }
+	}
+
+	.title {
+		color: var(--text-color);
+        display: none;
+	}
+}
+
+@keyframes slide-down-fwd {
+    0% {
+        transform: translateY(-10%)
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

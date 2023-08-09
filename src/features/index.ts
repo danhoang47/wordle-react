@@ -5,6 +5,7 @@ import SettingItem from "./setting-item";
 import StatisticsItem from "./statistics-item";
 import GameBoard from "./game-board";
 import VirtualKeyboard from "./virtual-keyboard";
+import RestartGameItem from "./restart-game-item";
 
 export {
     Header,
@@ -13,5 +14,6 @@ export {
     SettingItem,
     StatisticsItem,
     GameBoard,
-    VirtualKeyboard
+    VirtualKeyboard,
+    RestartGameItem
 }
