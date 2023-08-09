@@ -6,7 +6,7 @@ function HelpItem() {
 	return (
 		<IconButton
 			onClick={() => {}}
-			label="Help button"
+			ariaLabel="Help button"
 			icon={faCircleQuestion}
 			size="xl"
 		/>

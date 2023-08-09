@@ -59,7 +59,6 @@ const gameStateReducer = (
 			isComplete,
 		};
 	} else if (payload.action === "reset") {
-		console.log("Reset: ", payload.gameState);
 		return payload.gameState;
 	} else {
 		const nextState: GameState = {
@@ -87,9 +86,6 @@ function useGameState(initialState: GameState) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [keyword, setKeyword] = useState(getKeyword());
 	const [messages, setMessages] = useState<string[]>([]);
-
-	console.log(keyword);
-	console.log(gameState);
 
 	const onToastShowEnd = () => {
 		setMessages((prev) => prev.slice(0, prev.length - 1));
